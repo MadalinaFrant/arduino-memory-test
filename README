@@ -1,3 +1,19 @@
+Proiectul constă în realizarea unui joc de memorie similar jocului “chimp test”: 
+pe un LCD vor apărea primele N numere (N fiind incrementat la fiecare rundă) la 
+poziții aleatorii, apoi acestea vor dispărea, urmând ca jucătorul să ghicească 
+aceste numere, la pozițiile corecte, în ordine, folosind un joystick.
+
+Desfășurarea jocului este următoarea: se vor afișa cele N (inițial 4) numere și se 
+va folosi joystick-ul pentru a selecta pozițiile corespunzătoare pe ecran. După 
+selectarea poziției numărului 1, numerele vor dispărea (vor fi acoperite). În cazul 
+în care poziția unui număr este selectată corect se va aprinde LED-ul în culoarea verde, 
+iar în cazul unei greșeli în culoarea roșu. Sunt permise 3 greșeli per rundă. Pentru a 
+trece la următoarea rundă, respectiv pentru a relua runda în cazul depășirii numărului 
+maxim de greșeli se va apăsa butonul. Jocul permite 3 runde terminate greșit, după care 
+acesta se încheie. Jocul se consideră câștigat după terminarea corectă a ultimei runde, 
+când N este 9. La finalul jocului se afișează timpul mediu de răspuns al jucătorului. 
+Se poate începe un nou joc prin apăsarea butonului.
+
 În fișierul header memory_test.h au fost definite macro-uri pentru 
 pinii utilizați, s-au definit constantele fullBlock și outlineBlock
 necesare creării caracterului corespunzător cursorului și al unui 
