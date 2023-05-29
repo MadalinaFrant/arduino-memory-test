@@ -155,7 +155,7 @@ void printGameEnded(bool correct) {
 		lcd.print("GAME OVER");
     }
     lcd.setCursor(0, 1);
-    lcd.print("AVG. TIME: ");
+    lcd.print("AVG. TIME:");
     lcd.print(avgResponseTime);
     lcd.print("s");
 }
@@ -201,7 +201,7 @@ int getNumAtPos(pos atPos) {
 }
 
 /* intrerupere care trateaza apasarea butonului joystick-ului, cu semnificatia
-ghicirii pozitiei unui numar; nu are efect in timpul unei runde */
+ghicirii pozitiei unui numar; nu are efect in afara unei runde */
 ISR(INT0_vect)
 {
     if (inGame == false) {
@@ -216,7 +216,6 @@ ISR(INT0_vect)
         lastInterruptTime = interruptTime;
         return;
     }
-
     lastInterruptTime = interruptTime;
 
     buttonPressed = true;
@@ -265,10 +264,10 @@ void setup_interrupts() {
     /* configureaza intreruperile de tip pin change */
     PCICR |= (1 << PCIE2);
  
-    /* activare intreruperi externe */
+    /* activeaza intreruperile externe */
     EIMSK |= (1 << INT0);
  
-    /* activare intreruperi de tip pin change */
+    /* activeaza intreruperile de tip pin change */
     PCMSK2 |= (1 << PCINT20);
 
     sei();
@@ -439,7 +438,11 @@ void loop() {
         }
 
         if (gameEnded) {
-            avgResponseTime = (float)totalResponseTime / roundCount;
+            if (roundCount == 0) { // nicio runda terminata corect
+                avgResponseTime = 0;
+            } else {
+                avgResponseTime = (float)totalResponseTime / roundCount;
+            }
             totalResponseTime = 0;
             roundCount = 0;
         }

@@ -42,4 +42,3 @@ struct pos {
 		y = yVal;
 	}
 };
-

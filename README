@@ -1,0 +1,69 @@
+În fișierul header memory_test.h au fost definite macro-uri pentru 
+pinii utilizați, s-au definit constantele fullBlock și outlineBlock
+necesare creării caracterului corespunzător cursorului și al unui 
+număr acoperit, necesare afișării pe LCD, și s-a definit structura
+pos care reprezintă o poziție bidimensională.
+
+în cadrul fișierului memory_test.ino este implementată logica 
+programului, structurată în următoarele funcții:
+
+- setColor: setează culoarea LED-ului, în funcție de parametrii
+dați, folosind registre
+
+- getMove: obține următoarea mișcare în funcție de poziția 
+joystick-ului, de tipul stânga/dreapta/sus/jos 
+
+- updatePos: actualizează poziția cursorului după efectuarea noii
+mișcări, dacă aceasta este validă (nu iese din limitele ecranului)
+
+- setRandomPositions: alege poziții aleatorii pentru numere, astfel
+încât să nu existe mai multe numere pe aceeași poziție
+
+- existsPos: verifică existența unei poziții, adică dacă a fost 
+asignat un număr la acea poziție
+
+- printNum: afișează numărul primit ca parametru la poziția dată
+
+- printSquare: afișează un număr acoperit la poziția dată
+
+- printBlock: afișează cursorul la poziția dată
+
+- clearBlock: șterge caracterul de la poziția dată
+
+- printGameEnded: afișează un mesaj corespunzător după încheierea 
+jocului, în funcție de parametrul dat, cu semnificația modului în 
+care acesta s-a încheiat (corect/greșit)
+
+- printNextRound: afișează un mesaj corespunzător după terminarea 
+rundei, în funcție de parametrul dat, cu semnificația modului în 
+care aceasta s-a încheiat (corect/greșit); se afișează și numărul
+curent de strike-uri (runde încheiate greșit)
+
+- printNums: afișează numerele la pozițiile corespunzătoare, de la 
+următorul număr ce trebuie ghicit, acoperite sau nu în funcție de 
+parametrul dat
+
+- getNumAtPos: obține numărul aflat la poziția dată 
+
+- ISR(INT0_vect): întrerupere externă ce tratează apăsarea butonului
+joystick-ului, cu semnificația ghicirii unei poziții; se afișează 
+culoarea corespunzătoare a LED-ului în funcție de corectitudine 
+
+- ISR(PCINT2_vect): întrerupere de tip pin change ce tratează apăsarea 
+butonului, cu semnificația începerii unei noi runde
+
+- ISR(TIMER1_OVF_vect): întrerupere corespunzătoare timer-ului, cu 
+scopul măsurării timpului petrecut într-o rundă 
+
+- setup_interrupts: configurează întreruperile pentru butoane:
+întrerupere externă pentru butonul joystick-ului (INT0) și de 
+tip pin change pentru buton (PCINT20), conform datasheet-ului 
+
+- setup_timer: configurează timer-ul în mod normal (se dorește 
+o simplă măsurare a timpului), conform datasheet-ului 
+
+- setup: realizează setup-ul inițial
+
+- loop: se afișează mesajul corespunzător, respectiv numerele în 
+funcție de starea curentă a jocului și se realizează mutarea 
+cursorului în funcție de joystick
